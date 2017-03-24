@@ -1,22 +1,19 @@
-function validate(){
-  //Grab the user's input and store in variables
+function register(){
   var userEntered = document.getElementById("user").value;
   var passEntered = document.getElementById("pass").value;
-
-
-  var ltxt;
-  var utxt;
+  alert("Username entered:" + userEntered + "Password entered:" + passEntered);
+}
+function validateUsername(){
+  var userEntered = document.getElementById("user").value;
+  var pos = userEntered.indexOf(" ");
   var txt = userEntered;
   document.getElementById("user").innerHTML = txt.length;
-  var ptxt = passEntered;
-  document.getElementById("pass").innerHTML = ptxt.length;
-  var pos = userEntered.indexOf(" ");
-
-  ltxt= userEntered.toLowerCase();
 
   if ( txt.length >= 6 && pos == -1){
 
     document.getElementById("usernameGroup").classList.add("has-success");
+    document.getElementById("usernameGroup").classList.remove("has-error");
+
   }
   else if( txt.length < 6) {
 
@@ -24,18 +21,32 @@ function validate(){
     document.getElementById("usernameError").classList.remove("hidden-message");
     document.getElementById("usernameError").classList.add("shown-message");
     document.getElementById("usernameGroup").classList.add("has-error");
+    document.getElementById("usernameGroup").classList.remove("has-success");
   }
-  else {
 
-    document.getElementById("usernameError").innerHTML="No spaces are allowed.";
+  else if( pos != -1) {
+
+    document.getElementById("usernameError").innerHTML="Must contain no spaces.";
     document.getElementById("usernameError").classList.remove("hidden-message");
     document.getElementById("usernameError").classList.add("shown-message");
     document.getElementById("usernameGroup").classList.add("has-error");
+    document.getElementById("usernameGroup").classList.remove("has-success");
   }
+
+}
+
+function validatePassword(){
+  var passEntered = document.getElementById("pass").value;
+  var userEntered = document.getElementById("user").value;
+  var ptxt = passEntered;
+  document.getElementById("pass").innerHTML = ptxt.length;
+
+  var ltxt = userEntered.toLowerCase();
 
   if(userEntered.toLowerCase() != "password" && ptxt.length >= 6 && ptxt.length <= 20 && passEntered != userEntered){
 
     document.getElementById("passwordGroup").classList.add("has-success");
+    document.getElementById("passwordGroup").classList.remove("has-error");
   }
 
   else if( ltxt == "password"){
@@ -44,6 +55,7 @@ function validate(){
     document.getElementById("passwordError").classList.remove("hidden-message");
     document.getElementById("passwordError").classList.add("shown-message");
     document.getElementById("passwordGroup").classList.add("has-error");
+    document.getElementById("passwordGroup").classList.remove("has-success");
   }
   else if(ptxt.length < 6 || ptxt.length > 20){
 
@@ -51,12 +63,14 @@ function validate(){
     document.getElementById("passwordError").classList.remove("hidden-message");
     document.getElementById("passwordError").classList.add("shown-message");
     document.getElementById("passwordGroup").classList.add("has-error");
+    document.getElementById("passwordGroup").classList.remove("has-success");
   }
   else if(passEntered == userEntered){
     document.getElementById("passwordError").innerHTML="The password must be different then the username.";
     document.getElementById("passwordError").classList.remove("hidden-message");
     document.getElementById("passwordError").classList.add("shown-message");
     document.getElementById("passwordGroup").classList.add("has-error");
+    document.getElementById("passwordGroup").classList.remove("has-success");
   }
 
 }
